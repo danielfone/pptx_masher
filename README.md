@@ -1,8 +1,15 @@
-# PptxMasher
+# PPTXMasher
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pptx_masher`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+
+    p = PPTXMasher::Presentation.load "path/to/presentation.pptx"
+    slide = p.slides[1]
+    slide.replace_text "[title]", "acutal title"
+    slide.replace_media 'image3.jpeg', 'path/to/other/image/jpeg'
+    p.save "path/to/updated/presentation.pptx"
+
+    p.add_slide slide
 
 ## Installation
 

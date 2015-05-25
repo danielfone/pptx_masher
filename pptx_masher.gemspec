@@ -5,7 +5,7 @@ require 'pptx_masher/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "pptx_masher"
-  spec.version       = PptxMasher::VERSION
+  spec.version       = PPTXMasher::VERSION
   spec.authors       = ["Daniel Fone"]
   spec.email         = ["daniel@fone.net.nz"]
 

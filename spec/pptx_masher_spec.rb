@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe PptxMasher do
+describe PPTXMasher do
   it 'has a version number' do
-    expect(PptxMasher::VERSION).not_to be nil
+    expect(PPTXMasher::VERSION).not_to be nil
   end
 
   it 'does something useful' do

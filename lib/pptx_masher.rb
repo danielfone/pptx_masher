@@ -1,5 +1,5 @@
 require "pptx_masher/version"
 
-module PptxMasher
+module PPTXMasher
   # Your code goes here...
 end
