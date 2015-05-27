@@ -1,15 +1,14 @@
 # PPTXMasher
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pptx_masher`. To experiment with that code, run `bin/console` for an interactive prompt.
+This (unpublished) gem is for merging slides from Powerpoint presentations.
+It also allows you to make small modifications to the slides.
 
+It has been developed for a specific in-house application,
+so it is only really supported in that context.
+This is not under active development except for the needs of the original application,
+but the code is published here in case it's any use to anyone.
 
-    p = PPTXMasher::Presentation.load "path/to/presentation.pptx"
-    slide = p.slides[1]
-    slide.replace_text "[title]", "acutal title"
-    slide.replace_media 'image3.jpeg', 'path/to/other/image/jpeg'
-    p.save "path/to/updated/presentation.pptx"
-
-    p.add_slide slide
+Some parts were heavily influenced by the [powerpoint gem](https://github.com/pythonicrubyist/powerpoint).
 
 ## Installation
 
@@ -29,7 +28,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    p = PPTXMasher::Presentation.load "path/to/presentation.pptx"
+    slide = p.slides[1]
+    slide.replace_text "[title]", "acutal title"
+    slide.replace_media 'image3.jpeg', 'path/to/other/image/jpeg'
+    p.save "path/to/updated/presentation.pptx"
+
+    p.add_slide slide
 
 ## Development
 
