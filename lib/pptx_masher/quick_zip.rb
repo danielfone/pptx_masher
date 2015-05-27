@@ -1,6 +1,5 @@
 require 'zip/filesystem'
 require 'fileutils'
-require 'tmpdir'
 
 module PPTXMasher
   module QuickZip

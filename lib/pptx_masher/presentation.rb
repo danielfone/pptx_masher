@@ -1,3 +1,5 @@
+require 'tmpdir'
+require 'fileutils'
 require 'pptx_masher/quick_zip'
 require 'pptx_masher/slide'
 
@@ -6,7 +8,7 @@ module PPTXMasher
     attr_reader :tmp_dir
 
     def self.load(src)
-      dest = File.join Dir.tmpdir, "pptx_masher", SecureRandom.uuid
+      dest = Dir.mktmpdir "pptx_masher"
       QuickZip.extract src, dest
       new dest
     end
@@ -33,6 +35,14 @@ module PPTXMasher
 
     def save(path)
       QuickZip.compress tmp_dir, path
+    end
+
+    def close
+      FileUtils.remove_entry_secure tmp_dir
+    end
+
+    def save_and_close(path)
+      save path and close
     end
 
     def slide_count
