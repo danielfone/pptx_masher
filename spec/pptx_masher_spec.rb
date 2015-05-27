@@ -21,7 +21,7 @@ describe PPTXMasher do
     s3.replace_text '[TITLE]', "Second update"
 
     digest = checksum tmp_dir
-    expect(digest).to eq '4eb11a3f93f263f23f19d2d50dac334a'
+    expect(digest).to eq '64ee8e531e4ffea35e744359fb4665f8'
 
     template.save_and_close output_path
 

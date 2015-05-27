@@ -24,9 +24,12 @@ module PPTXMasher
     def add_slide(slide)
       n = slide_count + 1
       new_slide = slides[n]
-      FileUtils.copy slide.rels_path, new_slide.rels_path
+      FileUtils.copy slide.rels_path,           new_slide.rels_path
       FileUtils.copy slide.slide_xml_full_path, new_slide.slide_xml_full_path
+      FileUtils.copy slide.notes_rels_path,     new_slide.notes_rels_path
+      FileUtils.copy slide.notes_xml_full_path, new_slide.notes_xml_full_path
       # Copy media?
+      new_slide.update_rels
       new_slide.insert_content_type
       new_slide.insert_rels
       new_slide.insert_meta
