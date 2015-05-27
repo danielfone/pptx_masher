@@ -23,6 +23,10 @@ module PPTXMasher
       @tmp_dir = path
     end
 
+    def slides
+      @slides ||= Hash.new { |h, i| h[i] = Slide.new(self, i) }
+    end
+
     def save(path)
       warn "Extract into separate class"
       Zip::File.open(path, Zip::File::CREATE) do |zip_file|
@@ -37,6 +41,36 @@ module PPTXMasher
         end
       end
       true
+    end
+
+  end
+
+  class Slide
+    attr_reader :presentation, :number
+
+    def initialize(presentation, number)
+      @presentation = presentation
+      @number = Integer(number)
+    end
+
+    def slide_xml_path
+      @slide_xml_path ||= "#{presentation_path}/ppt/slides/slide#{@number}.xml"
+    end
+
+    def replace_text(pattern, replacement)
+      text = File.read(slide_xml_path)
+      new_contents = text.gsub pattern, replacement
+      File.open(slide_xml_path, "w") {|f| f.puts new_contents }
+    end
+
+    def replace_media(dest, src)
+
+    end
+
+  private
+
+    def presentation_path
+      @presentation_path ||= presentation.tmp_dir
     end
 
   end
