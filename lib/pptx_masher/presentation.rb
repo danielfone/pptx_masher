@@ -64,7 +64,7 @@ module PPTXMasher
     end
 
     def replace_media(dest, src)
-
+      FileUtils.copy src, "#{presentation_path}/ppt/media/#{dest}"
     end
 
   private
