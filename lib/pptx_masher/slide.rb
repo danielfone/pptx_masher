@@ -39,7 +39,7 @@ module PPTXMasher
     end
 
     def replace_text(pattern, replacement)
-      gsub_file slide_xml_full_path, pattern, replacement
+      gsub_file slide_xml_full_path, pattern, replacement.encode(xml: :text)
     end
 
     def replace_media(dest, src)
