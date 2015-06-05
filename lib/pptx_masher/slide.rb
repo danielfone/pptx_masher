@@ -42,11 +42,11 @@ module PPTXMasher
       gsub_file slide_xml_full_path, pattern, replacement.encode(xml: :text)
     end
 
-    def replace_media(dest, src)
+    def replace_media(dest, src_io)
       extension = dest.split('.').last
       new_name = "image#{presentation.media_count+1}.#{extension}"
       gsub_file rels_path, dest, new_name
-      FileUtils.copy src, "#{presentation_path}/ppt/media/#{new_name}"
+      File.open("#{presentation_path}/ppt/media/#{new_name}", 'w') {|f| f << src_io.read }
     end
 
     def insert_content_type

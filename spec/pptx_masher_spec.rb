@@ -16,7 +16,7 @@ describe PPTXMasher do
     s = template.slides[1]
     s2 = template.add_slide s
     s2.replace_text '[TITLE]', "First update with &entities <foo>"
-    s2.replace_media 'image6.jpeg', 'spec/data/AK00101-1.jpg'
+    s2.replace_media 'image6.jpeg', File.open('spec/data/AK00101-1.jpg')
     s3 = template.add_slide s
     s3.replace_text '[TITLE]', "Second update"
 
