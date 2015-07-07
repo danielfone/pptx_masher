@@ -18,12 +18,14 @@ module PPTXMasher
     end
 
     def slides
-      @slides ||= Hash.new { |h, i| h[i] = Slide.new(self, i) }
+      @slides ||= Hash[
+        1.upto(slide_count).map {|i| [i, Slide.new(self, i)] }
+      ]
     end
 
     def add_slide(slide)
       n = slide_count + 1
-      new_slide = slides[n]
+      new_slide = slides[n] = Slide.new(self, n)
       FileUtils.copy slide.rels_path,           new_slide.rels_path
       FileUtils.copy slide.slide_xml_full_path, new_slide.slide_xml_full_path
       FileUtils.copy slide.notes_rels_path,     new_slide.notes_rels_path

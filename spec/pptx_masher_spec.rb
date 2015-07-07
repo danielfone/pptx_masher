@@ -13,12 +13,16 @@ describe PPTXMasher do
     template = PPTXMasher::Presentation.load "spec/data/stasaph_rate_card.pptx"
     tmp_dir = template.tmp_dir
 
+    expect(template.slides.count).to eq 1
+
     s = template.slides[1]
     s2 = template.add_slide s
     s2.replace_text '[TITLE]', "First update with &entities <foo>"
     s2.replace_media 'image6.jpeg', File.open('spec/data/AK00101-1.jpg')
     s3 = template.add_slide s
     s3.replace_text '[TITLE]', "Second update"
+
+    expect(template.slides.count).to eq 3
 
     digest = checksum tmp_dir
     expect(digest).to eq '9567aec315db7bc69e5edc7449805d7d'
