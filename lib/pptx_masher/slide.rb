@@ -42,6 +42,10 @@ module PPTXMasher
       gsub_file slide_xml_full_path, pattern, replacement.encode(xml: :text)
     end
 
+    def replace_rels_text(pattern, replacement)
+      gsub_file rels_path, pattern, replacement.encode(xml: :text)
+    end
+
     def replace_media(dest, src_io)
       extension = dest.split('.').last
       new_name = "image#{presentation.media_count+1}.#{extension}"
