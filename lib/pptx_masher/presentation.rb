@@ -26,10 +26,10 @@ module PPTXMasher
     def add_slide(slide)
       n = slide_count + 1
       new_slide = slides[n] = Slide.new(self, n)
-      FileUtils.copy slide.rels_path,           new_slide.rels_path
-      FileUtils.copy slide.slide_xml_full_path, new_slide.slide_xml_full_path
-      FileUtils.copy slide.notes_rels_path,     new_slide.notes_rels_path
-      FileUtils.copy slide.notes_xml_full_path, new_slide.notes_xml_full_path
+      safe_copy slide.rels_path,           new_slide.rels_path
+      safe_copy slide.slide_xml_full_path, new_slide.slide_xml_full_path
+      safe_copy slide.notes_rels_path,     new_slide.notes_rels_path
+      safe_copy slide.notes_xml_full_path, new_slide.notes_xml_full_path
       # Copy media?
       new_slide.update_rels
       new_slide.insert_content_type
@@ -44,6 +44,11 @@ module PPTXMasher
 
     def close
       FileUtils.remove_entry_secure tmp_dir
+    end
+
+    def safe_copy(src, dest)
+      FileUtils.mkdir_p File.dirname dest
+      FileUtils.cp src, dest
     end
 
     def save_and_close(path)
