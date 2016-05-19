@@ -50,12 +50,7 @@ module PPTXMasher
       extension = dest.split('.').last
       new_name = "image#{presentation.media_count+1}.#{extension}"
       gsub_file rels_path, dest, new_name
-      File.open("#{presentation_path}/ppt/media/#{new_name}", 'wb') do |f| 
-        buffer = ''
-        while src_io.read(1048576, buffer)
-          f.puts buffer
-        end
-      end
+      IO.copy_stream src_io, "#{presentation_path}/ppt/media/#{new_name}"
     end
 
     def insert_content_type

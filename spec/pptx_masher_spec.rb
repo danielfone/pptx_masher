@@ -33,6 +33,8 @@ describe PPTXMasher do
     expect(type).to include 'Zip archive data, at least v2.0 to extract'
     expect(Dir.exists? tmp_dir).to eq false
 
+    expect(File.size output_path).to eq 534316
+
     system "open -W #{output_path}" if ENV['OPEN_PPT']
     output_file.unlink
   end

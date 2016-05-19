@@ -22,18 +22,17 @@ module PPTXMasher
         src_files.each do |path|
           zip_path = path.gsub "#{src}/", ''
           next if zip_path == "." || zip_path == ".."
-          if File.directory?(path)
-            zip_file.mkdir(zip_path)
-          else
-            zip_file.get_output_stream zip_path do |io|
-              File.open(path, 'rb') do |src_file|
-                buffer = ''
-                while src_file.read(1048576, buffer) do
-                  io.puts buffer
-                end
-              end
-            end
-          end
+          make_zip_path(zip_file, path, zip_path)
+        end
+      end
+    end
+
+    def make_zip_path(zip_file, path, zip_path)
+      if File.directory?(path)
+        zip_file.mkdir(zip_path)
+      else
+        zip_file.get_output_stream zip_path do |io|
+          IO.copy_stream path, io
         end
       end
     end
